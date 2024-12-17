@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>select</title>
+    <title>login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -26,16 +26,21 @@
 </script>
 <body>
     <div class="container">
-        <div class="d-flex justify-content-center">
-            <h1>포인트 조회</h1>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div>ㅇㅇㅇ 님</div><br>
-            <div>현재 포인트 : 포인트</div><br>
-        </div>
-        <br>
-        <a href="/">홈으로</a>
 
+        <h1 class="text-center">로그인</h1>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="">
+                <input type="text" id="loginIdInput" placeholder="로그인 ID" class="form-control ">
+
+                <input type="password" id="passwordInput" placeholder="비밀번호" class="form-control mt-2">
+
+                <button type="button" class="btn btn-primary btn-block mt-2" id="loginBtn">로그인</button>
+            </div>
+        </div>
+
+        <a href="/">홈으로</a>
     </div>
 </body>
 </html>
