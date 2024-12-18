@@ -8,11 +8,4 @@ public record PointHistory(
         long updateMillis
 ) {
 
-    public PointHistory(long id, long userId, long amount, TransactionType type, long updateMillis) {
-        this.id = id;
-        this.userId = userId;
-        this.amount = amount;
-        this.type = type;
-        this.updateMillis = updateMillis;
-    }
 }

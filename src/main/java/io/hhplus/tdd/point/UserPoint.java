@@ -10,10 +10,4 @@ public record UserPoint(
     public static UserPoint empty(long id) {
         return new UserPoint(id, 0, System.currentTimeMillis());
     }
-
-    public UserPoint(long id, long point, long updateMillis) {
-        this.id = id;
-        this.point = point;
-        this.updateMillis = updateMillis;
-    }
 }

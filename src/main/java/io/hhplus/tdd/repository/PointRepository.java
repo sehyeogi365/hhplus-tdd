@@ -9,13 +9,14 @@ import java.util.Optional;
 
 public interface PointRepository {
 
-    //Member save(Member member);
-
     // 특정 유저의 이름으로 조회
-    List<PointMemberDTO> findByName(String name);
+    Optional <Point> findByName(String name);
 
-    // 특정 멤버 ID로 조회
-    Optional<PointMemberDTO> findByMemberId(Long memberId);
+    // 포인트 조회
+    Optional <Point> findByMemberId(Long memberId);
 
+    //충전 & 사용
+    Point charge(Long memberId);
+    Point use(Long memberId);//파라미터 memberId, 가격 ,타입이렇게 변경하기
 
 }
