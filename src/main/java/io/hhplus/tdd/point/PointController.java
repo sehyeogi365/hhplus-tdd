@@ -76,10 +76,11 @@ public class PointController {
 //        return new UserPoint(0, 0, 0);
 //    }
     @PatchMapping("{id}/charge")
-    public Point charge (@PathVariable long id
+    public Point charge (@PathVariable long id,
+                         @RequestBody long amount
                          , Point point
                     ){
-        Point charge = pointService.save(point);
+        Point charge = pointService.usePoint(point);
 
         return charge;
     }
@@ -99,7 +100,7 @@ public class PointController {
             @RequestBody long amount,
             Point point
     ) {
-        Point use = pointService.save(point);
+        Point use = pointService.usePoint(point);
 
         return use;
     }

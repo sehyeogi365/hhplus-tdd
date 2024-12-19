@@ -39,29 +39,38 @@ public class PointService {
     /**
      * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
      */
-    //포인트 충전
+    //포인트 충전 요구사항 분석 참고하기
+    public Point chargePoint(Point point){
+        // 1. 유저의 현재 포인트 조회 given
+        Point currentPoint = pointRepository.findByMemberId(point.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
 
+        // 2. 포인트 확인(이것도 요구 사항대로 로직 작성)
+        if (currentPoint.getAmount() < point.getAmount()) {
+            throw new IllegalStateException("Insufficient points");
+        }
+        // 3. 포인트 충전 then
+        return pointRepository.charge(point);
+
+    }
 
 
     /**
      * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.
      */
 
-    //포인트 사용
-    public Point usePoint(long memberId, long amount){
+    //포인트 사용 요구사항 분석 참고하기
+    public Point usePoint(Point point){
         // 1. 유저의 현재 포인트 조회
-        Point currentPoint = pointRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + memberId));;
+        Point currentPoint = pointRepository.findByMemberId(point.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
 
-        // 2. 포인트 부족 여부 확인 현재 포인트가
-        if (currentPoint.getAmount() < amount) {
+        // 2. 포인트 부족 여부 확인 현재 포인트가 쓰는포인트보다 더 적은지(이것도 요구 사항대로 로직 작성)
+        if (currentPoint.getAmount() < point.getAmount()) {
             throw new IllegalStateException("Insufficient points");
         }
 
         // 3. 포인트 차감
-        return pointRepository.use(memberId);
+        return pointRepository.use(point);
     }
-
-
 
 
 }

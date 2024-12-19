@@ -16,7 +16,7 @@ public interface PointRepository {
     Optional <Point> findByMemberId(Long memberId);
 
     //충전 & 사용
-    Point charge(Long memberId);
-    Point use(Long memberId);//파라미터 memberId, 가격 ,타입이렇게 변경하기
+    Point charge(Point point);
+    Point use(Point point);//파라미터 memberId, 가격 ,타입이렇게 변경하기
 
 }

@@ -31,15 +31,17 @@ public class JpaPointRepository implements PointRepository {
         return Optional.ofNullable(point);
     }
 
+    //포인트 충전 & 사용
     @Override
-    public Point save(Point point) {//포인트 충전 & 사용
-
+    public Point charge(Point point) {
         em.persist(point);
-
         return point;
     }
 
-
-
+    @Override
+    public Point use(Point point) {
+        em.persist(point);
+        return point;
+    }
 
 }

@@ -23,13 +23,21 @@ public class MemoryPointRepository implements PointRepository{
     }
 
     @Override
-    public Point save(Point point) {
+    public Point charge(Point point) {
         point.setId(sequence++);
-        //point.setAmount(po);//포인트 충전 & 사용
         store.put(point.getId(), point);
         return point;
     }
 
+    @Override
+    public Point use(Point point) {
+        point.setId(sequence++);
+        store.put(point.getId(), point);
+        return point;
+    }
 
+    public void clearStore() {
+        store.clear();
+    }
 
 }

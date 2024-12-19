@@ -15,6 +15,7 @@ public class Point {
 
     private Long memberId;
 
+    private String name;
     private Integer amount;
 
     private String type;
@@ -35,6 +36,14 @@ public class Point {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getAmount() {
