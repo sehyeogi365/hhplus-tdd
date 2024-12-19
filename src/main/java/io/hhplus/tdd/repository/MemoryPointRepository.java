@@ -27,14 +27,14 @@ public class MemoryPointRepository implements PointRepository{
     }
 
     @Override
-    public Point charge(Point point) {
+    public synchronized Point charge(Point point) {
         point.setId(sequence++);
         store.put(point.getId(), point);
         return point;
     }
 
     @Override
-    public Point use(Point point) {
+    public synchronized Point use(Point point) {
         point.setId(sequence++);
         store.put(point.getId(), point);
         return point;
