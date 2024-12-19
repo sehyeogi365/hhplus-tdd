@@ -21,7 +21,9 @@ public class MemoryPointRepository implements PointRepository{
 
     @Override
     public Optional<Point> findByMemberId(Long memberId) {
-        return Optional.ofNullable(store.get(memberId));
+        return store.values().stream()
+                .filter(point -> point.getMemberId().equals(memberId))
+                .findAny();
     }
 
     @Override

@@ -7,13 +7,14 @@ import io.hhplus.tdd.dto.PointMemberDTO;
 import io.hhplus.tdd.point.PointHistory;
 import io.hhplus.tdd.point.UserPoint;
 import io.hhplus.tdd.repository.PointRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.Optional;
 
-
+@Transactional
 public class PointService {
 
     PointRepository pointRepository;
@@ -42,12 +43,17 @@ public class PointService {
     //포인트 충전 요구사항 분석 참고하기
     public Point chargePoint(Point point){
         // 1. 유저의 현재 포인트 조회 given
-        Point currentPoint = pointRepository.findByMemberId(point.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
-
-        // 2. 포인트 확인(이것도 요구 사항대로 로직 작성)
-        if (currentPoint.getAmount() < point.getAmount()) {
-            throw new IllegalStateException("Insufficient points");
+        if(point.getAmount() < 0){
+            throw new IllegalArgumentException("Amount cannot be negative");
         }
+//        Point currentPoint = pointRepository.findByMemberId(point.getMemberId())
+//                        .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
+//
+//        // 2. 포인트 확인(이것도 요구 사항대로 로직 작성)
+//
+//        if (currentPoint.getAmount() < point.getAmount()) {
+//            throw new IllegalStateException("Insufficient points");
+//        }
         // 3. 포인트 충전 then
         return pointRepository.charge(point);
 
@@ -60,13 +66,16 @@ public class PointService {
 
     //포인트 사용 요구사항 분석 참고하기
     public Point usePoint(Point point){
-        // 1. 유저의 현재 포인트 조회
-        Point currentPoint = pointRepository.findByMemberId(point.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
+        // 1. 유저의 현재 포인트 조회 given
+        if(point.getAmount() < 0){
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
+        //Point currentPoint = pointRepository.findByMemberId(point.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + point.getMemberId()));
 
         // 2. 포인트 부족 여부 확인 현재 포인트가 쓰는포인트보다 더 적은지(이것도 요구 사항대로 로직 작성)
-        if (currentPoint.getAmount() < point.getAmount()) {
-            throw new IllegalStateException("Insufficient points");
-        }
+//        if (currentPoint.getAmount() < point.getAmount()) {
+//            throw new IllegalStateException("Insufficient points");
+//        }
 
         // 3. 포인트 차감
         return pointRepository.use(point);
