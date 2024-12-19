@@ -41,7 +41,7 @@ public class PointService {
      * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
      */
     //포인트 충전 요구사항 분석 참고하기
-    public Point chargePoint(Point point){
+    public synchronized Point chargePoint(Point point){
         // 1. 유저의 현재 포인트 조회 given
         if(point.getAmount() < 0){
             throw new IllegalArgumentException("Amount cannot be negative");
@@ -65,7 +65,7 @@ public class PointService {
      */
 
     //포인트 사용 요구사항 분석 참고하기
-    public Point usePoint(Point point){
+    public synchronized Point usePoint(Point point){
         // 1. 유저의 현재 포인트 조회 given
         if(point.getAmount() < 0){
             throw new IllegalArgumentException("Amount cannot be negative");
