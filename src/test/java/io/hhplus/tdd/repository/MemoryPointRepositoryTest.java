@@ -19,6 +19,7 @@ public class MemoryPointRepositoryTest {
         repository.clearStore();
     }
 
+    //포인트 조회
     @Test
     public void findByName(){
 
