@@ -14,7 +14,9 @@ public class MemoryPointRepository implements PointRepository{
 
     @Override
     public Optional<Point> findByName(String name) {
-        return Optional.ofNullable(store.get(name));
+        return store.values().stream()//애를 루프로 돌린다. 람다식 사용
+                .filter(point -> point.getName().equals(name))//포인트에서 포인트.getName이 여기 파라미트로 넘어온 Name이랑 같은지 확인하는 거
+                .findAny();
     }
 
     @Override
