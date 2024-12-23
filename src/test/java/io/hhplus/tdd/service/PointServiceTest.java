@@ -3,12 +3,14 @@ package io.hhplus.tdd.service;
 
 import io.hhplus.tdd.domain.Point;
 import io.hhplus.tdd.repository.MemoryPointRepository;
+import io.hhplus.tdd.repository.PointRepository;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,17 +20,19 @@ public class PointServiceTest {
 
     PointService pointService;
 
-    MemoryPointRepository pointRepository;
+    PointRepository pointRepository;
+
+    MemoryPointRepository memoryPointRepository;
 
     //동작하기 전에 넣어준다 BeforeEach
     @BeforeEach
     public void beforeEach(){
-        pointRepository = new MemoryPointRepository();
+        pointRepository = Mockito.mock(PointRepository.class);
         pointService = new PointService(pointRepository);
     }
     @AfterEach//테스트 돌때마다 초기화
     public void afterEach(){
-        pointRepository.clearStore();
+        memoryPointRepository.clearStore();
     }
 
     @Test
