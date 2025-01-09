@@ -3,12 +3,14 @@ package io.hhplus.tdd.service;
 
 import io.hhplus.tdd.domain.Point;
 import io.hhplus.tdd.repository.MemoryPointRepository;
+import io.hhplus.tdd.repository.PointRepository;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,17 +20,19 @@ public class PointServiceTest {
 
     PointService pointService;
 
-    MemoryPointRepository pointRepository;
+    PointRepository pointRepository;
+
+    MemoryPointRepository memoryPointRepository;
 
     //동작하기 전에 넣어준다 BeforeEach
     @BeforeEach
     public void beforeEach(){
-        pointRepository = new MemoryPointRepository();
+        pointRepository = Mockito.mock(PointRepository.class);
         pointService = new PointService(pointRepository);
     }
     @AfterEach//테스트 돌때마다 초기화
     public void afterEach(){
-        pointRepository.clearStore();
+        memoryPointRepository.clearStore();
     }
 
     @Test
@@ -65,7 +69,6 @@ public class PointServiceTest {
         } else {
             System.out.println("");
         }
-
     }
 
     //최대 충전 가능 포인트(백만)보다 초과해서 충전시
@@ -135,7 +138,6 @@ public class PointServiceTest {
         } else {
             System.out.println("");
         }
-
     }
 
     //10,000 포인트 단위로 충전안할시
@@ -167,7 +169,6 @@ public class PointServiceTest {
         //given 뭔가가 주어졌는데
         //when 이거를 실행했을 떄
         //then 결과가 이게 나와야 돼
-
     }
 
     @Test
@@ -187,7 +188,6 @@ public class PointServiceTest {
         } else {
             System.out.println("포인트 사용 됨 나머지 포인트 : " + (point.getAmount() - useAmount));
         }
-
     }
     //한도 내역 초과해서 100,000 포인트 초과 사용시 실패
     @Test
@@ -228,7 +228,6 @@ public class PointServiceTest {
         if(!usedPoint.getName().equals(point1.getName())){
             System.out.println("다른 사용자 포인트를 쓸수 없습니다.");
         }
-
     }
 
 }

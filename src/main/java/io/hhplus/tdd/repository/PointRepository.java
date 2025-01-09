@@ -1,10 +1,8 @@
 package io.hhplus.tdd.repository;
 
-import io.hhplus.tdd.domain.Member;
-import io.hhplus.tdd.domain.Point;
-import io.hhplus.tdd.dto.PointMemberDTO;
 
-import java.util.List;
+import io.hhplus.tdd.domain.Point;
+
 import java.util.Optional;
 
 public interface PointRepository {
