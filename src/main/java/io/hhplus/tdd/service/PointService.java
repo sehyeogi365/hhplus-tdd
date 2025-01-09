@@ -1,17 +1,12 @@
 package io.hhplus.tdd.service;
 
-import io.hhplus.tdd.database.UserPointTable;
+
 import io.hhplus.tdd.domain.Member;
 import io.hhplus.tdd.domain.Point;
-import io.hhplus.tdd.dto.PointMemberDTO;
-import io.hhplus.tdd.point.PointHistory;
-import io.hhplus.tdd.point.UserPoint;
+
 import io.hhplus.tdd.repository.PointRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Transactional
@@ -33,7 +28,6 @@ public class PointService {
      * TODO - 특정 유저의 포인트 충전/이용 내역을 조회하는 기능을 작성해주세요.
      */
     public Optional<Point> getUserPointHistory(Member member){
-
         return pointRepository.findByName(member.getName());
     }
 
@@ -56,7 +50,6 @@ public class PointService {
 //        }
         // 3. 포인트 충전 then
         return pointRepository.charge(point);
-
     }
 
 

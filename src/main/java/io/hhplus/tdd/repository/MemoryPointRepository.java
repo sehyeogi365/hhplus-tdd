@@ -1,7 +1,6 @@
 package io.hhplus.tdd.repository;
 
 import io.hhplus.tdd.domain.Point;
-import io.hhplus.tdd.dto.PointMemberDTO;
 
 import java.util.HashMap;
 import java.util.Map;

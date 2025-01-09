@@ -1,8 +1,7 @@
 package io.hhplus.tdd.repository;
 
-import io.hhplus.tdd.domain.Member;
 import io.hhplus.tdd.domain.Point;
-import io.hhplus.tdd.dto.PointMemberDTO;
+
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
