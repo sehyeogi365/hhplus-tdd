@@ -1,28 +1,25 @@
 package io.hhplus.tdd.point;
 
 
-import io.hhplus.tdd.domain.Member;
-import io.hhplus.tdd.domain.Point;
+
 import io.hhplus.tdd.service.PointService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/point")
 public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
 
-    PointService pointService;
+    private final PointService pointService;
 
-    public PointController(PointService pointService) {
-        this.pointService = pointService;
-    }
 
     /**
      * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
@@ -32,16 +29,8 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        return new UserPoint(0, 0, 0);//postService 호출하기
+        return pointService.getUserPoint(id);//postService 호출하기
     }
-//    @GetMapping("{id}")
-//    public String point(@PathVariable long id, Model model) {
-//
-//        Optional<Point> point = pointService.getUserPoint(id);
-//        model.addAttribute("point", point);
-//
-//        return "/point/select";
-//    }
 
     /**
      * TODO - 특정 유저의 포인트 충전/이용 내역을 조회하는 기능을 작성해주세요.
@@ -50,20 +39,8 @@ public class PointController {
     public List<PointHistory> history(
             @PathVariable long id
     ) {
-        return List.of();//getUserPointHistory 호출
+        return pointService.getUserPointHistory(id);//List.of()->getUserPointHistory 호출
     }
-
-//    @GetMapping("{id}/histories")
-//    public String history(
-//            @PathVariable long id,
-//            Model model,
-//            Member meber
-//    ) {
-//        Optional<Point> history = pointService.getUserPointHistory(meber);
-//        model.addAttribute("point", history);
-//
-//        return "/point/history";
-//    }
 
     /**
      * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
@@ -73,17 +50,9 @@ public class PointController {
             @PathVariable long id,
             @RequestBody long amount
     ) {
-        return pointService.chargePoint(id);//chargePoint 호출
+        return pointService.chargePoint(id, amount);//chargePoint 호출
     }
-//    @PatchMapping("{id}/charge")
-//    public Point charge (@PathVariable long id,
-//                         @RequestBody long amount
-//                         , Point point
-//                    ){
-//        Point charge = pointService.usePoint(point);
-//
-//        return charge;
-//    }
+
     /**
      * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.
      */
@@ -92,19 +61,9 @@ public class PointController {
             @PathVariable long id,
             @RequestBody long amount
     ) {
-        return pointService.usePoint(amount);//usePoint 호출
+        return pointService.usePoint(id, amount);//usePoint 호출
     }
 
-//    @PatchMapping("{id}/use")
-//    public Point use(
-//            @PathVariable long id,
-//            @RequestBody long amount,
-//            Point point
-//    ) {
-//        Point use = pointService.usePoint(point);
-//
-//        return use;
-//    }
 
 
 }
